@@ -11,9 +11,6 @@ predictor and add_update methods work to whittle those lists down to one value: 
 The solver is called repeatedly until it can't find any new numbers, then the predictor starts by checking cans lists
 of length 2 (incremented until a solution is found) and testing each value in that list to learn information. 
 
-The solver has been tested with all 50 puzzles in the aforementioned text file and many puzzles from a book I own and has
-yet to fail.
-
-Updates to come: switch the cells list of 81 lists to a pandas data frame.
+Updates to come: Include a back up solver with advanced techniques. Switch the cells list of 81 lists to a pandas data frame.
 
 2. TBA
