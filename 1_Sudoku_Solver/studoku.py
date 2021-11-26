@@ -303,6 +303,11 @@ def main():
 		nums_added = 0
 		cells, Solved = solver(cells, steps)
 		while not nums_added:
+			if cans_set_length == 7:
+				print_puzzle(cells)
+				print(cells)
+				input()
+				cans_set_length = 2
 			passes += 1
 			print("No numbers added.")
 			# Use predictor to solve
