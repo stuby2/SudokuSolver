@@ -1,6 +1,5 @@
-## Studoku Solver, hopefully the last iteration ##
-import copy
-
+## Sudoku Solver ## by stu
+import copy 
 # Global Variable #
 nums_added = 0
 
@@ -99,9 +98,9 @@ def predictor(cells, z, steps=False):
 	# Solves by trial and error
 
 	# Make a copy of cells so we can revert back
-	copy_1 = copy.deepcopy(cells)
+	cells = copy.deepcopy(cells)
 
-	for cell in copy_1:
+	for cell in cells:
 		nums_added = 0
 		nums_removed = 0
 		if len(cell[4]) == z:
@@ -113,10 +112,10 @@ def predictor(cells, z, steps=False):
 					input()
 				
 				try: # Running into an error means this value is incorrect.
-					copy_2, notSolved = add_update(copy_1, cell[0], cell[1], cell[2], attempt, pre=True)			
+					copy1, notSolved = add_update(cells, cell[0], cell[1], cell[2], attempt, pre=True)			
 					if not notSolved:
 						print("Solved by Predictor.")
-						return copy_2, True
+						return copy1, True
 
 					else: # We don't know if the value is right or wrong.
 						put_back.add(attempt) 
@@ -132,15 +131,15 @@ def predictor(cells, z, steps=False):
 			# No longer predictions, we can update cell data.
 			if len(cell[4]) == 1:
 				new_val = cell[4].pop()
-				copy_2, notSolved = add_update(copy_1, cell[0], cell[1], cell[2], new_val)
+				copy1, notSolved = add_update(cells, cell[0], cell[1], cell[2], new_val)
 				print(f"Predictor didn't solve but added {nums_added} numbers.")
-				return solver(copy_2, steps) # Not solved because it would've in line 115 
+				return solver(copy1, steps) # Not solved because it would've in line 115 
 			
-			else: # We've removed values from copy_1 that weren't correct.
-				solver(copy_1, steps)
+			else: # We've removed values from cells that weren't correct.
+				solver(cells, steps)
 				continue # This is unneccessary, for now.
 	
-	return copy_1, False 
+	return cells, False 
 
 def solver(cells, steps=False):
 	print("## LAUNCHING SOLVER ##")
