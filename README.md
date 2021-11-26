@@ -3,6 +3,7 @@
 A variety of projects and problems I've worked on.
 
 1. Sudoku Solver (studoku.py)
+
 Works with a solver and - if needed - a predictor to fill puzzles from either p096_sudoku.txt (from Project Euler) 
 or from user input. The program populates lists of 'cans' (values that can go in an empty cell) and then the solver,
 predictor and add_update methods work to whittle those lists down to one value: the correct value for that cell.
