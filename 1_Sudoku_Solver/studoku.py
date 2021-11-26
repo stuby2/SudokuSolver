@@ -97,9 +97,6 @@ def predictor(cells, z, steps=False):
 	global nums_added
 	# Solves by trial and error
 
-	# Make a copy of cells so we can revert back
-	cells = copy.deepcopy(cells)
-
 	for cell in cells:
 		nums_added = 0
 		nums_removed = 0
@@ -136,6 +133,7 @@ def predictor(cells, z, steps=False):
 				return solver(copy1, steps) # Not solved because it would've in line 115 
 			
 			else: # We've removed values from cells that weren't correct.
+				print("Got some info.")
 				solver(cells, steps)
 				continue # This is unneccessary, for now.
 	
@@ -305,12 +303,14 @@ def main():
 		nums_added = 0
 		cells, Solved = solver(cells, steps)
 		while not nums_added:
+			passes += 1
 			print("No numbers added.")
 			# Use predictor to solve
 			cells, Solved = predictor(cells, cans_set_length, steps)
 			if Solved:
 				print("Solved.")
 			else:
+				cells, Solved = solver(cells, steps) # Assuming we got some info.
 				cans_set_length += 1
 
 		print(f"After pass {passes}, {nums_added} numbers were added.")
