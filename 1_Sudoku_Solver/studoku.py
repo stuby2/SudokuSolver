@@ -91,9 +91,10 @@ def populate_cans(cells):
 	return cells
 
 def predictor(cells, z, steps=False):
-	# input("Press Enter to Launch Predictor")
-	print("## LAUNCHING PREDICTOR ##")
-	# print(f"Cans set length is {z}.")
+	if steps:
+		input("Press Enter to Launch Predictor")
+		print("## LAUNCHING PREDICTOR ##")
+		print(f"Cans set length is {z}.")
 	global nums_added
 	# Solves by trial and error
 
@@ -129,18 +130,19 @@ def predictor(cells, z, steps=False):
 			if len(cell[4]) == 1:
 				new_val = cell[4].pop()
 				copy1, notSolved = add_update(cells, cell[0], cell[1], cell[2], new_val)
-				print(f"Predictor didn't solve but added {nums_added} numbers.")
+				# print(f"Predictor didn't solve but added {nums_added} numbers.")
 				return solver(copy1, steps) # Not solved because it would've in line 115 
 			
 			else: # We've removed values from cells that weren't correct.
-				print("Got some info.")
+				# print("Got some info.")
 				solver(cells, steps)
 				continue # This is unneccessary, for now.
 	
 	return cells, False 
 
 def solver(cells, steps=False):
-	print("## LAUNCHING SOLVER ##")
+	if steps:
+		print("## LAUNCHING SOLVER ##")
 	global nums_added
 	# Go through rows, columns, and boxes to see
 	# if any number is only in one set of cans
@@ -303,13 +305,11 @@ def main():
 		nums_added = 0
 		cells, Solved = solver(cells, steps)
 		while not nums_added:
-			if cans_set_length == 7:
-				print_puzzle(cells)
-				print(cells)
-				input()
+			if cans_set_length == 6:
+				# print("Resetting Predictor.")
 				cans_set_length = 2
 			passes += 1
-			print("No numbers added.")
+			# print("No numbers added.")
 			# Use predictor to solve
 			cells, Solved = predictor(cells, cans_set_length, steps)
 			if Solved:
@@ -318,8 +318,11 @@ def main():
 				cells, Solved = solver(cells, steps) # Assuming we got some info.
 				cans_set_length += 1
 
-		print(f"After pass {passes}, {nums_added} numbers were added.")
-		print_puzzle(cells)
-		input()
+		if steps:
+			print(f"After pass {passes}, {nums_added} numbers were added.")
+			print_puzzle(cells)
+			input()
+
+	print_puzzle(cells)
 
 main()
