@@ -1,8 +1,4 @@
-# miscProjects
- 
-A variety of projects and problems I've worked on.
-
-1. Sudoku Solver (studoku.py)
+Sudoku Solver (studoku.py)
 
 Works with a solver and - if needed - a predictor to fill puzzles from either p096_sudoku.txt (from Project Euler) 
 or from user input. The program populates lists of 'cans' (values that can go in an empty cell) and then the solver,
@@ -13,4 +9,4 @@ of length 2 (incremented until a solution is found) and testing each value in th
 
 Updates to come: Include a back up solver with advanced techniques. Switch the cells list of 81 lists to a pandas data frame.
 
-2. TBA
+
